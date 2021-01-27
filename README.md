@@ -13,3 +13,6 @@ eg: ./tool net ping www.baidu.com
 查看目录下都有什么文件(也是比较鸡肋)
 eg ./tool shell ls /home
 
+
+
+fix
