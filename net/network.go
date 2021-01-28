@@ -1,10 +1,13 @@
 package net
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
+	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"time"
 )
 
@@ -53,4 +56,30 @@ func Ping(args []string)  {
 	if err != nil {
 		fmt.Printf("Failed to ping target host: %s", err)
 	}
+}
+
+func Curl(args string)  {
+		if args == "" {
+			fmt.Println("您尚未输入任何路径，请重试")
+			os.Exit(1)
+		}
+		if !strings.HasPrefix(args, "http://") && !strings.HasPrefix(args, "https://") {
+			args = "http://" + args
+		}
+		resp, err := http.Get(args)
+		if err != nil {
+			fmt.Println("获取url发生了错误，错误代码是:", err)
+		}
+		fmt.Println("打印url:", args)
+		fmt.Println("打印状态码：", resp.StatusCode)
+		buf := new(bytes.Buffer)
+		buf.ReadFrom(resp.Body)
+		fmt.Printf(buf.String())
+
+		resp.Body.Close()
+		if err != nil {
+			fmt.Println("读取body的时候发生了错误", err)
+		}
+
+
 }

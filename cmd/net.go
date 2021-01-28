@@ -17,6 +17,8 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/Hzhenyong/go/tool/net"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -27,6 +29,19 @@ var netCmd = &cobra.Command{
 	Short: "集成网络相关的工具",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("net called")
+
+		if len(args) == 0 {
+			fmt.Println("请输入一个命令。 eg: ")
+			os.Exit(0)
+		}
+		switch args[0] {
+		case "curl":
+			net.Curl(args[1])
+		case "ping":
+			net.Ping(args)
+		default:
+			fmt.Printf("暂未支持")
+		}
 	},
 }
 

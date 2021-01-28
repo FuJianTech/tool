@@ -17,8 +17,7 @@ package cmd
 
 import (
 	"fmt"
-	"runtime"
-
+	"github.com/Hzhenyong/go/tool/net"
 	"github.com/spf13/cobra"
 )
 
@@ -37,12 +36,14 @@ func init() {
 }
 
 func version()  {
-	goos := runtime.GOOS
-	goarch := runtime.GOARCH
-	s := runtime.Version()
-	fmt.Printf("操作系统为：%s \n", goos)
-	fmt.Printf("CPU架构为：%s \n", goarch)
-	fmt.Printf("go编译版本：%s \n", s)
+	//goos := runtime.GOOS
+	//goarch := runtime.GOARCH
+	//s := runtime.Version()
+	//fmt.Printf("操作系统为：%s \n", goos)
+	//fmt.Printf("CPU架构为：%s \n", goarch)
+	//fmt.Printf("go编译版本：%s \n", s)
+	host := net.GetHost()
+	fmt.Println(host)
 
 
 }
